@@ -3,7 +3,7 @@
 public class H2LBitsWriterTest
 {
     [Fact]
-    public void TestCase1()
+    public void Test1()
     {
         var ms = new MemoryStream();
         var bw = new H2LBitsWriter(ms);

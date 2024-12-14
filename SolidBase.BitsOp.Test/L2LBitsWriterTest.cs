@@ -3,6 +3,42 @@
 public class L2LBitsWriterTest
 {
     [Fact]
+    public void Test1()
+    {
+        var ms = new MemoryStream();
+        var bw = new L2LBitsWriter(ms);
+
+        bw.Write(9, 0b_100000000);
+        bw.Write(9, 0b_011111111);
+        bw.Write(9, 0b_100000010);
+        bw.Write(9, 0b_100000011);
+        bw.Write(9, 0b_100000100);
+        bw.Write(9, 0b_100000101);
+        bw.Write(9, 0b_100000110);
+        bw.Write(9, 0b_100000111);
+
+        bw.Flush();
+
+        if (ms.TryGetBuffer(out var buffer))
+        {
+            Assert.Equal(9, buffer.Count);
+            Assert.Equal(0b_00000000, buffer[0]);
+            Assert.Equal(0b_11111111, buffer[1]);
+            Assert.Equal(0b_00001001, buffer[2]);
+            Assert.Equal(0b_00011100, buffer[3]);
+            Assert.Equal(0b_01001000, buffer[4]);
+            Assert.Equal(0b_10110000, buffer[5]);
+            Assert.Equal(0b_10100000, buffer[6]);
+            Assert.Equal(0b_11000001, buffer[7]);
+            Assert.Equal(0b_10000011, buffer[8]);
+        }
+        else
+        {
+            throw new InvalidOperationException();
+        }
+    }
+
+    [Fact]
     public void TestSingleByteWrite()
     {
         for (int value = 0; value <= byte.MaxValue; value++)

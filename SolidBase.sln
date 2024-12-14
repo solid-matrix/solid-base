@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidBase.BitsOp.Test", "So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidBase.Lzw.Test", "SolidBase.Lzw.Test\SolidBase.Lzw.Test.csproj", "{EBBDAD56-0934-4719-9FD1-5C9862DE8E33}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{DF6084F5-88F4-4F3C-9CE6-9BEC6FE9B5F8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolidBase", "SolidBase", "{DF6084F5-88F4-4F3C-9CE6-9BEC6FE9B5F8}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		LICENSE = LICENSE
