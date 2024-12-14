@@ -17,7 +17,7 @@ public class LzwEncodeTest
         using var ucStream = File.OpenRead(TestCases[0].Item1);
         using var ms = new MemoryStream();
 
-        LzwCodec.Encode(ucStream, ms);
+        new LzwCodec().Encode(ucStream, ms);
 
         if (ms.TryGetBuffer(out var buffer))
             Assert.Equal(lzwBytes, buffer);
@@ -33,7 +33,7 @@ public class LzwEncodeTest
         using var ucStream = File.OpenRead(TestCases[1].Item1);
         using var ms = new MemoryStream();
 
-        LzwCodec.Encode(ucStream, ms);
+        new LzwCodec().Encode(ucStream, ms);
 
         if (ms.TryGetBuffer(out var buffer))
             Assert.Equal(lzwBytes, buffer);
@@ -49,7 +49,7 @@ public class LzwEncodeTest
         using var ucStream = File.OpenRead(TestCases[2].Item1);
         using var ms = new MemoryStream();
 
-        LzwCodec.Encode(ucStream, ms);
+        new LzwCodec().Encode(ucStream, ms);
 
         if (ms.TryGetBuffer(out var buffer))
             Assert.Equal(lzwBytes, buffer);
@@ -66,7 +66,7 @@ public class LzwEncodeTest
 
         using var ms = new MemoryStream(4 * 1024 * 1024);
 
-        LzwCodec.Encode(ucStream, ms);
+        new LzwCodec().Encode(ucStream, ms);
 
         if (ms.TryGetBuffer(out var buffer))
             Assert.Equal(lzwBytes, buffer);

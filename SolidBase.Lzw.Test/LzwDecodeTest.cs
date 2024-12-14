@@ -18,7 +18,7 @@ public class LzwDecodeTest
 
         using var ms = new MemoryStream();
 
-        LzwCodec.Decode(lzwStream, ms);
+        new LzwCodec().Decode(lzwStream, ms);
 
         if (ms.TryGetBuffer(out var buffer))
             Assert.Equal(ucBytes, buffer);
@@ -35,7 +35,7 @@ public class LzwDecodeTest
 
         using var ms = new MemoryStream();
 
-        LzwCodec.Decode(lzwStream, ms);
+        new LzwCodec().Decode(lzwStream, ms);
 
         if (ms.TryGetBuffer(out var buffer))
             Assert.Equal(ucBytes, buffer);
@@ -52,7 +52,7 @@ public class LzwDecodeTest
 
         using var ms = new MemoryStream();
 
-        LzwCodec.Decode(lzwStream, ms);
+        new LzwCodec().Decode(lzwStream, ms);
 
         if (ms.TryGetBuffer(out var buffer))
             Assert.Equal(ucBytes, buffer);
@@ -69,7 +69,7 @@ public class LzwDecodeTest
 
         using var ms = new MemoryStream();
 
-        LzwCodec.Decode(lzwStream, ms);
+        new LzwCodec().Decode(lzwStream, ms);
 
         if (ms.TryGetBuffer(out var buffer))
             Assert.Equal(ucBytes, buffer);

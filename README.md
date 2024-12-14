@@ -100,5 +100,18 @@ var countRead = br.Read(11, out var value);
 
 ## SolidBase.Lzw
 
-Lzw algorithm implementation, with default configuration for TIFF compress usage.
+Lzw algorithm implementation for 8bits-byte-stream encoding and decoding.
+
+Usage
+
+```c#
+// default MAX_BIT_COUNT = 12;
+var codec = new LzwCodec(MAX_BIT_COUNT);
+
+// encode from inputStream(uncompressed) to outputStream(lzw compressed)
+codec.Encode(inputStream, outputStream);
+
+// decode from inputStream(lzw-compressed) to outputStream(uncompressed)
+codec.Decode(inputStream, outputStream);
+```
 
