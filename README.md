@@ -1,5 +1,8 @@
 # SolidBase
 
+- [SolidBase.BitsOp](##SolidBase.BitsOp): Bits and bytes operation utilities.
+- [SolidBase.Lzw](##SolidBase.Lzw): Lzw compress utility for 8bits-byte-stream.
+
 ## SolidBase.BitsOp
 
 Bits and bytes operation utilities.
@@ -100,7 +103,7 @@ var countRead = br.Read(11, out var value);
 
 ## SolidBase.Lzw
 
-Lzw algorithm implementation for 8bits-byte-stream encoding and decoding.
+Lzw compress utility for 8bits-byte-stream.
 
 Usage
 
