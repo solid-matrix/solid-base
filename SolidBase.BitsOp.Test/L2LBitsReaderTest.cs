@@ -11,12 +11,12 @@ public class L2LBitsReaderTest(ITestOutputHelper output)
         var ms = new MemoryStream(buffer);
         var br = new L2LBitsReader(ms);
 
-        long value;
+        uint value;
         int count;
 
         count = br.Read(0, out value);
         Assert.Equal(0, count);
-        Assert.Equal(0, value);
+        Assert.Equal(0u, value);
     }
 
     [Fact]
@@ -26,12 +26,12 @@ public class L2LBitsReaderTest(ITestOutputHelper output)
         var ms = new MemoryStream(buffer);
         var br = new L2LBitsReader(ms);
 
-        long value;
+        uint value;
         int count;
 
         count = br.Read(8, out value);
         Assert.Equal(0, count);
-        Assert.Equal(0, value);
+        Assert.Equal(0u, value);
     }
 
     [Fact]
@@ -41,18 +41,18 @@ public class L2LBitsReaderTest(ITestOutputHelper output)
         var ms = new MemoryStream(buffer);
         var br = new L2LBitsReader(ms);
 
-        long value;
+        uint value;
         int count;
 
         for (int i = 0; i < buffer.Length; i++)
         {
             count = br.Read(4, out value);
             Assert.Equal(4, count);
-            Assert.Equal(buffer[i] & 0xf, value);
+            Assert.Equal((uint)(buffer[i] & 0xf), value);
 
             count = br.Read(4, out value);
             Assert.Equal(4, count);
-            Assert.Equal(buffer[i] >> 4, value);
+            Assert.Equal((uint)(buffer[i] >> 4), value);
         }
     }
 
@@ -64,36 +64,36 @@ public class L2LBitsReaderTest(ITestOutputHelper output)
         var ms = new MemoryStream(buffer);
         var br = new L2LBitsReader(ms);
 
-        long value;
+        uint value;
         int count;
 
         count = br.Read(5, out value);
         Assert.Equal(5, count);
-        Assert.Equal(0b01010, value);
+        Assert.Equal(0b01010u, value);
 
         count = br.Read(5, out value);
         Assert.Equal(5, count);
-        Assert.Equal(0b01101, value);
+        Assert.Equal(0b01101u, value);
 
         count = br.Read(5, out value);
         Assert.Equal(5, count);
-        Assert.Equal(0b10101, value);
+        Assert.Equal(0b10101u, value);
 
         count = br.Read(5, out value);
         Assert.Equal(5, count);
-        Assert.Equal(0b11000, value);
+        Assert.Equal(0b11000u, value);
 
         count = br.Read(5, out value);
         Assert.Equal(5, count);
-        Assert.Equal(0b11100, value);
+        Assert.Equal(0b11100u, value);
 
         count = br.Read(5, out value);
         Assert.Equal(5, count);
-        Assert.Equal(0b11001, value);
+        Assert.Equal(0b11001u, value);
 
         count = br.Read(2, out value);
         Assert.Equal(2, count);
-        Assert.Equal(0b10, value);
+        Assert.Equal(0b10u, value);
     }
 
     [Fact]
@@ -103,7 +103,7 @@ public class L2LBitsReaderTest(ITestOutputHelper output)
         var ms = new MemoryStream(buffer);
         var br = new L2LBitsReader(ms);
 
-        long value;
+        uint value;
         int count;
 
         for (int i = 0; i < buffer.Length; i++)
@@ -121,20 +121,20 @@ public class L2LBitsReaderTest(ITestOutputHelper output)
         var ms = new MemoryStream(buffer);
         var br = new L2LBitsReader(ms);
 
-        long value;
+        uint value;
         int count;
 
         count = br.Read(11, out value);
         Assert.Equal(11, count);
-        Assert.Equal(0b10110101010, value);
+        Assert.Equal(0b10110101010u, value);
 
         count = br.Read(11, out value);
         Assert.Equal(11, count);
-        Assert.Equal(0b00110001010, value);
+        Assert.Equal(0b00110001010u, value);
 
         count = br.Read(10, out value);
         Assert.Equal(10, count);
-        Assert.Equal(0b1011001111, value);
+        Assert.Equal(0b1011001111u, value);
     }
 
     [Fact]
@@ -144,11 +144,11 @@ public class L2LBitsReaderTest(ITestOutputHelper output)
         var ms = new MemoryStream(buffer);
         var br = new L2LBitsReader(ms);
 
-        long value;
+        uint value;
         int count;
 
         count = br.Read(32, out value);
         Assert.Equal(32, count);
-        Assert.Equal(0b10110011110011000101010110101010, value);
+        Assert.Equal(0b10110011110011000101010110101010u, value);
     }
 }

@@ -14,13 +14,13 @@ public unsafe class LzwCodec
 
     public static void Encode(Stream input, Stream output)
     {
-        TrieStringTable table = new();
-
         var bw = new H2LBitsWriter(output);
 
-        ushort codeMax = EOI_CODE;
+        TrieStringTable table = new(MAX_CODE_BIT_COUNT);
 
-        ushort size = MIN_CODE_BIT_COUNT;
+        var codeMax = EOI_CODE;
+
+        var size = MIN_CODE_BIT_COUNT;
 
         var pBuffer = stackalloc byte[1 << MAX_CODE_BIT_COUNT];
 
@@ -49,7 +49,7 @@ public unsafe class LzwCodec
                 {
                     bw.Write(size, CLEAR_CODE);
 
-                    table = new();
+                    table = new(MAX_CODE_BIT_COUNT);
                     codeMax = EOI_CODE;
                     size = MIN_CODE_BIT_COUNT;
                 }
@@ -66,6 +66,60 @@ public unsafe class LzwCodec
 
     public static void Decode(Stream input, Stream output)
     {
-        throw new NotImplementedException();
+        var br = new H2LBitsReader(input);
+
+        byte[][] table = null!;
+        uint codeMax = EOI_CODE;
+        int size = MIN_CODE_BIT_COUNT;
+
+        byte[]? p = null;
+
+        while (true)
+        {
+            int codeSize = br.Read(size, out uint code);
+            if (codeSize != size) throw new Exception("fail to read code");
+            if (code == EOI_CODE) break;
+
+            if (code == CLEAR_CODE)
+            {
+                table = new byte[1 << MAX_CODE_BIT_COUNT][];
+                for (uint i = 0; i < 256; i++) table[i] = [(byte)i];
+
+                codeMax = EOI_CODE;
+                size = MIN_CODE_BIT_COUNT;
+                p = null;
+            }
+            else
+            {
+                byte[] k = table[code];
+
+                if (k != null)
+                {
+                    output.Write(k);
+
+                    if (p != null)
+                    {
+                        ++codeMax;
+                        table[codeMax] = [.. p, k[0]];
+                        if (((codeMax + 2) >> size) > 0) size++;
+                    }
+
+                    p = k;
+                }
+                else
+                {
+                    k = [.. p, p![0]];
+
+                    output.Write(k);
+
+                    ++codeMax;
+                    table[codeMax] = k;
+                    if (((codeMax + 2) >> size) > 0) size++;
+
+                    p = k;
+                }
+            }
+        }
+
     }
 }

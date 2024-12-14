@@ -2,12 +2,14 @@
 
 public unsafe class TrieStringTable
 {
-    readonly ushort[][] _child = new ushort[4096][];
-    readonly int[] _value = new int[4096];
+    readonly ushort[][] _child;
+    readonly int[] _value;
     ushort _size;
 
-    public TrieStringTable()
+    public TrieStringTable(int maxSize = 12)
     {
+        _child = new ushort[1 << maxSize][];
+        _value = new int[1 << maxSize];
         _child[0] = new ushort[256];
         for (ushort i = 0; i < 256; i++)
         {

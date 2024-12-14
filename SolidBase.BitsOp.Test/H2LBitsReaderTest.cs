@@ -9,12 +9,12 @@ public class H2LBitsReaderTest
         var ms = new MemoryStream(buffer);
         var br = new H2LBitsReader(ms);
 
-        long value;
+        uint value;
         int count;
         count = br.Read(0, out value);
 
         Assert.Equal(0, count);
-        Assert.Equal(0, value);
+        Assert.Equal(0u, value);
     }
 
     [Fact]
@@ -24,12 +24,12 @@ public class H2LBitsReaderTest
         var ms = new MemoryStream(buffer);
         var br = new H2LBitsReader(ms);
 
-        long value;
+        uint value;
         int count;
         count = br.Read(8, out value);
 
         Assert.Equal(0, count);
-        Assert.Equal(0, value);
+        Assert.Equal(0u, value);
     }
 
     [Fact]
@@ -39,40 +39,40 @@ public class H2LBitsReaderTest
         var ms = new MemoryStream(buffer);
         var br = new H2LBitsReader(ms);
 
-        long value;
+        uint value;
         int count;
 
         count = br.Read(4, out value);
         Assert.Equal(4, count);
-        Assert.Equal(0b1000, value);
+        Assert.Equal(0b1000u, value);
 
         count = br.Read(4, out value);
         Assert.Equal(4, count);
-        Assert.Equal(0b0000, value);
+        Assert.Equal(0b0000u, value);
 
         count = br.Read(4, out value);
         Assert.Equal(4, count);
-        Assert.Equal(0b0011, value);
+        Assert.Equal(0b0011u, value);
 
         count = br.Read(4, out value);
         Assert.Equal(4, count);
-        Assert.Equal(0b1111, value);
+        Assert.Equal(0b1111u, value);
 
         count = br.Read(4, out value);
         Assert.Equal(4, count);
-        Assert.Equal(0b1110, value);
+        Assert.Equal(0b1110u, value);
 
         count = br.Read(4, out value);
         Assert.Equal(4, count);
-        Assert.Equal(0b0000, value);
+        Assert.Equal(0b0000u, value);
 
         count = br.Read(4, out value);
         Assert.Equal(4, count);
-        Assert.Equal(0b0101, value);
+        Assert.Equal(0b0101u, value);
 
         count = br.Read(4, out value);
         Assert.Equal(4, count);
-        Assert.Equal(0b0000, value);
+        Assert.Equal(0b0000u, value);
     }
 
     [Fact]
@@ -82,36 +82,36 @@ public class H2LBitsReaderTest
         var ms = new MemoryStream(buffer);
         var br = new H2LBitsReader(ms);
 
-        long value;
+        uint value;
         int count;
 
         count = br.Read(5, out value);
         Assert.Equal(5, count);
-        Assert.Equal(0b10000, value);
+        Assert.Equal(0b10000u, value);
 
         count = br.Read(5, out value);
         Assert.Equal(5, count);
-        Assert.Equal(0b00000, value);
+        Assert.Equal(0b00000u, value);
 
         count = br.Read(5, out value);
         Assert.Equal(5, count);
-        Assert.Equal(0b11111, value);
+        Assert.Equal(0b11111u, value);
 
         count = br.Read(5, out value);
         Assert.Equal(5, count);
-        Assert.Equal(0b11110, value);
+        Assert.Equal(0b11110u, value);
 
         count = br.Read(5, out value);
         Assert.Equal(5, count);
-        Assert.Equal(0b00000, value);
+        Assert.Equal(0b00000u, value);
 
         count = br.Read(5, out value);
         Assert.Equal(5, count);
-        Assert.Equal(0b10100, value);
+        Assert.Equal(0b10100u, value);
 
         count = br.Read(5, out value);
         Assert.Equal(2, count);
-        Assert.Equal(0b00, value);
+        Assert.Equal(0b00u, value);
     }
 
     [Fact]
@@ -121,24 +121,24 @@ public class H2LBitsReaderTest
         var ms = new MemoryStream(buffer);
         var br = new H2LBitsReader(ms);
 
-        long value;
+        uint value;
         int count;
 
         count = br.Read(8, out value);
         Assert.Equal(8, count);
-        Assert.Equal(0b10000000, value);
+        Assert.Equal(0b10000000u, value);
 
         count = br.Read(8, out value);
         Assert.Equal(8, count);
-        Assert.Equal(0b00111111, value);
+        Assert.Equal(0b00111111u, value);
 
         count = br.Read(8, out value);
         Assert.Equal(8, count);
-        Assert.Equal(0b11100000, value);
+        Assert.Equal(0b11100000u, value);
 
         count = br.Read(8, out value);
         Assert.Equal(8, count);
-        Assert.Equal(0b01010000, value);
+        Assert.Equal(0b01010000u, value);
     }
 
     [Fact]
@@ -148,20 +148,20 @@ public class H2LBitsReaderTest
         var ms = new MemoryStream(buffer);
         var br = new H2LBitsReader(ms);
 
-        long value;
+        uint value;
         int count;
 
         count = br.Read(11, out value);
         Assert.Equal(11, count);
-        Assert.Equal(0b10000000001, value);
+        Assert.Equal(0b10000000001u, value);
 
         count = br.Read(11, out value);
         Assert.Equal(11, count);
-        Assert.Equal(0b11111111000, value);
+        Assert.Equal(0b11111111000u, value);
 
         count = br.Read(11, out value);
         Assert.Equal(10, count);
-        Assert.Equal(0b0001010000, value);
+        Assert.Equal(0b0001010000u, value);
     }
 
     [Fact]
@@ -171,7 +171,7 @@ public class H2LBitsReaderTest
         var ms = new MemoryStream(buffer);
         var br = new H2LBitsReader(ms);
 
-        long value;
+        uint value;
         int count;
 
         count = br.Read(32, out value);

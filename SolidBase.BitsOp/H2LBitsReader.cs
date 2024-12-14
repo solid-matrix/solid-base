@@ -5,7 +5,7 @@ public class H2LBitsReader(Stream stream) : IBitsReader
     private long _left = 0;
     private int _len = 0;
 
-    public int Read(int bitCount, out long value)
+    public int Read(int bitCount, out uint value)
     {
         ArgumentOutOfRangeException.ThrowIfLessThan(bitCount, 0);
         ArgumentOutOfRangeException.ThrowIfGreaterThan(bitCount, 32);
@@ -21,7 +21,7 @@ public class H2LBitsReader(Stream stream) : IBitsReader
 
         tmp = Math.Min(bitCount, _len);
 
-        value = (_left >> (_len - tmp)) & (((long)1 << tmp) - 1);
+        value = (uint)((_left >> (_len - tmp)) & (((long)1 << tmp) - 1));
         _len -= tmp;
 
         return tmp;
