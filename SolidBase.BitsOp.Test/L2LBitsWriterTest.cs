@@ -12,7 +12,7 @@ public class L2LBitsWriterTest
                 var ms = new MemoryStream();
                 var bw = new L2LBitsWriter(ms);
 
-                bw.Write(value, len);
+                bw.Write(len, value);
                 bw.Flush();
 
                 if (ms.TryGetBuffer(out var buffer))
@@ -29,10 +29,10 @@ public class L2LBitsWriterTest
         var ms = new MemoryStream();
         var bw = new L2LBitsWriter(ms);
 
-        bw.Write(0xff, 0);
-        bw.Write(0xfe, 0);
-        bw.Write(0xfc, 0);
-        bw.Write(0xfd, 0);
+        bw.Write(0, 0xff);
+        bw.Write(0, 0xfe);
+        bw.Write(0, 0xfc);
+        bw.Write(0, 0xfd);
         bw.Flush();
 
         if (ms.TryGetBuffer(out var buffer))
@@ -51,14 +51,14 @@ public class L2LBitsWriterTest
 
         foreach (var b in bytes)
         {
-            bw.Write(b >> 0, 1);
-            bw.Write(b >> 1, 1);
-            bw.Write(b >> 2, 1);
-            bw.Write(b >> 3, 1);
-            bw.Write(b >> 4, 1);
-            bw.Write(b >> 5, 1);
-            bw.Write(b >> 6, 1);
-            bw.Write(b >> 7, 1);
+            bw.Write(1, b >> 0);
+            bw.Write(1, b >> 1);
+            bw.Write(1, b >> 2);
+            bw.Write(1, b >> 3);
+            bw.Write(1, b >> 4);
+            bw.Write(1, b >> 5);
+            bw.Write(1, b >> 6);
+            bw.Write(1, b >> 7);
         }
         bw.Flush();
 
@@ -93,8 +93,8 @@ public class L2LBitsWriterTest
 
         foreach (var b in bytes)
         {
-            bw.Write(b, 4);
-            bw.Write(b >> 4, 4);
+            bw.Write(4, b);
+            bw.Write(4, b >> 4);
         }
         bw.Flush();
 
@@ -126,12 +126,12 @@ public class L2LBitsWriterTest
         var bw = new L2LBitsWriter(ms);
 
 
-        bw.Write(0b11111, 5);
-        bw.Write(0b00000, 5);
-        bw.Write(0b10101, 5);
-        bw.Write(0b01010, 5);
-        bw.Write(0b11011, 5);
-        bw.Write(0b10001, 5);
+        bw.Write(5, 0b11111);
+        bw.Write(5, 0b00000);
+        bw.Write(5, 0b10101);
+        bw.Write(5, 0b01010);
+        bw.Write(5, 0b11011);
+        bw.Write(5, 0b10001);
         bw.Flush();
 
         if (ms.TryGetBuffer(out var buffer))
@@ -155,7 +155,8 @@ public class L2LBitsWriterTest
 
         var bytes = "Hello World!"u8;
 
-        foreach (var b in bytes) bw.Write(b, 8);
+        foreach (var b in bytes)
+            bw.Write(8, b);
         bw.Flush();
 
         if (ms.TryGetBuffer(out var buffer))
@@ -185,10 +186,10 @@ public class L2LBitsWriterTest
         var ms = new MemoryStream();
         var bw = new L2LBitsWriter(ms);
 
-        bw.Write(0b1010101010101, 13);
-        bw.Write(0b1100110011001, 13);
-        bw.Write(0b1000100010001, 13);
-        bw.Write(0b1011011101111, 13);
+        bw.Write(13, 0b1010101010101);
+        bw.Write(13, 0b1100110011001);
+        bw.Write(13, 0b1000100010001);
+        bw.Write(13, 0b1011011101111);
         bw.Flush();
 
         if (ms.TryGetBuffer(out var buffer))
@@ -218,7 +219,8 @@ public class L2LBitsWriterTest
             nums[i] = (ushort)(0xff - (1 << i));
         }
 
-        foreach (int num in nums) bw.Write(num, 16);
+        foreach (int num in nums)
+            bw.Write(16, num);
         bw.Flush();
 
         if (ms.TryGetBuffer(out var buffer))
@@ -246,7 +248,8 @@ public class L2LBitsWriterTest
             nums[i] = (ushort)(0xff - (1 << i));
         }
 
-        foreach (int num in nums) bw.Write(num, 32);
+        foreach (int num in nums)
+            bw.Write(32, num);
         bw.Flush();
 
         if (ms.TryGetBuffer(out var buffer))

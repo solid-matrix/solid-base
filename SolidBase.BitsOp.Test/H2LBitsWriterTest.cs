@@ -8,14 +8,14 @@ public class H2LBitsWriterTest
         var ms = new MemoryStream();
         var bw = new H2LBitsWriter(ms);
 
-        bw.Write(0b_100000000, 9);
-        bw.Write(0b_011111111, 9);
-        bw.Write(0b_100000010, 9);
-        bw.Write(0b_100000011, 9);
-        bw.Write(0b_100000100, 9);
-        bw.Write(0b_100000101, 9);
-        bw.Write(0b_100000110, 9);
-        bw.Write(0b_100000111, 9);
+        bw.Write(9, 0b_100000000);
+        bw.Write(9, 0b_011111111);
+        bw.Write(9, 0b_100000010);
+        bw.Write(9, 0b_100000011);
+        bw.Write(9, 0b_100000100);
+        bw.Write(9, 0b_100000101);
+        bw.Write(9, 0b_100000110);
+        bw.Write(9, 0b_100000111);
 
         bw.Flush();
 

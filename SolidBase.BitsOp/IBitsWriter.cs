@@ -2,9 +2,7 @@
 
 public interface IBitsWriter
 {
-    public void Write(int bits, int bitCount);
-
-    public void Write(uint bits, int bitCount);
+    public void Write(int bitCount, long bits);
 
     public void Flush();
 }

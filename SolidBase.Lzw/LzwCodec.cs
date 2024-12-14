@@ -26,7 +26,7 @@ public unsafe class LzwCodec
 
         int pLen = 0;
 
-        bw.Write(CLEAR_CODE, size);
+        bw.Write(size, CLEAR_CODE);
         while (true)
         {
             int tmp = input.ReadByte();
@@ -39,7 +39,7 @@ public unsafe class LzwCodec
             }
             else
             {
-                bw.Write(table.Get(pBuffer, pLen), size);
+                bw.Write(size, table.Get(pBuffer, pLen));
 
                 table.Add(pBuffer, pLen + 1, ++codeMax);
 
@@ -47,7 +47,7 @@ public unsafe class LzwCodec
 
                 if (codeMax + 3 >= (1 << MAX_CODE_BIT_COUNT))
                 {
-                    bw.Write(CLEAR_CODE, size);
+                    bw.Write(size, CLEAR_CODE);
 
                     table = new();
                     codeMax = EOI_CODE;
@@ -59,8 +59,8 @@ public unsafe class LzwCodec
             }
         }
 
-        bw.Write(table.Get(pBuffer, pLen), size);
-        bw.Write(EOI_CODE, size);
+        bw.Write(size, table.Get(pBuffer, pLen));
+        bw.Write(size, EOI_CODE);
         bw.Flush();
     }
 

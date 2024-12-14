@@ -2,5 +2,5 @@
 
 public interface IBitsReader
 {
-    public bool Read(int bitCount, out int value);
+    public int Read(int bitCount, out long value);
 }
