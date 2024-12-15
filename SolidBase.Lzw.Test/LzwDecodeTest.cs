@@ -2,12 +2,13 @@
 
 public class LzwDecodeTest
 {
-    static Tuple<string, string>[] TestCases = [
-        new Tuple<string,string>("../../../tests/1-uc","../../../tests/1-lzw"),
-        new Tuple<string,string>("../../../tests/2-uc","../../../tests/2-lzw"),
-        new Tuple<string,string>("../../../tests/3-uc","../../../tests/3-lzw"),
-        new Tuple<string,string>("../../../tests/4-uc","../../../tests/4-lzw"),
-        ];
+    private static readonly Tuple<string, string>[] TestCases =
+    [
+        new("../../../tests/1-uc", "../../../tests/1-lzw"),
+        new("../../../tests/2-uc", "../../../tests/2-lzw"),
+        new("../../../tests/3-uc", "../../../tests/3-lzw"),
+        new("../../../tests/4-uc", "../../../tests/4-lzw")
+    ];
 
     [Fact]
     public void Test1()

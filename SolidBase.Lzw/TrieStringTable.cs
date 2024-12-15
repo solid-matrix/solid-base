@@ -2,9 +2,9 @@
 
 public unsafe class TrieStringTable
 {
-    readonly ushort[][] _child;
-    readonly int[] _value;
-    ushort _size;
+    private readonly ushort[][] _child;
+    private readonly int[] _value;
+    private ushort _size;
 
     public TrieStringTable(int maxSize = 12)
     {
@@ -17,40 +17,39 @@ public unsafe class TrieStringTable
             _child[i + 1] = new ushort[256];
             _value[i + 1] = i;
         }
+
         _size = 257;
     }
 
     public bool Exist(byte* str, int len)
     {
-        int node = 0;
-        for (int i = 0; i < len; i++)
+        var node = 0;
+        for (var i = 0; i < len; i++)
         {
             var tmp = _child[node][str[i]];
             if (tmp == 0) return false;
             node = tmp;
-
         }
+
         return true;
     }
 
     public int Get(byte* str, int len)
     {
-        int node = 0;
-        for (int i = 0; i < len; i++) node = _child[node][str[i]];
+        var node = 0;
+        for (var i = 0; i < len; i++) node = _child[node][str[i]];
         return _value[node];
     }
 
     public void Add(byte* str, int len, int value)
     {
         var node = 0;
-        for (int i = 0; i < len - 1; i++) node = _child[node][str[i]];
+        for (var i = 0; i < len - 1; i++) node = _child[node][str[i]];
         _value[_size] = value;
         _child[_size] = new ushort[256];
         _child[node][str[len - 1]] = _size++;
     }
-
 }
-
 
 //public unsafe class TrieStringTable2
 //{

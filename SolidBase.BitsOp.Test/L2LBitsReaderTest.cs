@@ -44,7 +44,7 @@ public class L2LBitsReaderTest(ITestOutputHelper output)
         uint value;
         int count;
 
-        for (int i = 0; i < buffer.Length; i++)
+        for (var i = 0; i < buffer.Length; i++)
         {
             count = br.Read(4, out value);
             Assert.Equal(4, count);
@@ -106,7 +106,7 @@ public class L2LBitsReaderTest(ITestOutputHelper output)
         uint value;
         int count;
 
-        for (int i = 0; i < buffer.Length; i++)
+        for (var i = 0; i < buffer.Length; i++)
         {
             count = br.Read(8, out value);
             Assert.Equal(8, count);

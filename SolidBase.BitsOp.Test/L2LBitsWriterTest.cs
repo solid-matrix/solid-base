@@ -41,21 +41,19 @@ public class L2LBitsWriterTest
     [Fact]
     public void TestSingleByteWrite()
     {
-        for (int value = 0; value <= byte.MaxValue; value++)
+        for (var value = 0; value <= byte.MaxValue; value++)
+        for (var len = 1; len <= 8; len++)
         {
-            for (int len = 1; len <= 8; len++)
-            {
-                var ms = new MemoryStream();
-                var bw = new L2LBitsWriter(ms);
+            var ms = new MemoryStream();
+            var bw = new L2LBitsWriter(ms);
 
-                bw.Write(len, value);
-                bw.Flush();
+            bw.Write(len, value);
+            bw.Flush();
 
-                if (ms.TryGetBuffer(out var buffer))
-                    Assert.Equal(value & ((1 << len) - 1), Assert.Single(buffer));
-                else
-                    throw new InvalidOperationException();
-            }
+            if (ms.TryGetBuffer(out var buffer))
+                Assert.Equal(value & ((1 << len) - 1), Assert.Single(buffer));
+            else
+                throw new InvalidOperationException();
         }
     }
 
@@ -96,10 +94,10 @@ public class L2LBitsWriterTest
             bw.Write(1, b >> 6);
             bw.Write(1, b >> 7);
         }
+
         bw.Flush();
 
         if (ms.TryGetBuffer(out var buffer))
-        {
             Assert.Collection(buffer,
                 v => Assert.Equal((byte)'H', v),
                 v => Assert.Equal((byte)'e', v),
@@ -113,8 +111,7 @@ public class L2LBitsWriterTest
                 v => Assert.Equal((byte)'l', v),
                 v => Assert.Equal((byte)'d', v),
                 v => Assert.Equal((byte)'!', v)
-                );
-        }
+            );
         else
             throw new InvalidOperationException();
     }
@@ -132,10 +129,10 @@ public class L2LBitsWriterTest
             bw.Write(4, b);
             bw.Write(4, b >> 4);
         }
+
         bw.Flush();
 
         if (ms.TryGetBuffer(out var buffer))
-        {
             Assert.Collection(buffer,
                 v => Assert.Equal((byte)'H', v),
                 v => Assert.Equal((byte)'e', v),
@@ -149,8 +146,7 @@ public class L2LBitsWriterTest
                 v => Assert.Equal((byte)'l', v),
                 v => Assert.Equal((byte)'d', v),
                 v => Assert.Equal((byte)'!', v)
-                );
-        }
+            );
         else
             throw new InvalidOperationException();
     }
@@ -179,7 +175,9 @@ public class L2LBitsWriterTest
             Assert.Equal(0b00100011, buffer[3]);
         }
         else
+        {
             throw new InvalidOperationException();
+        }
     }
 
 
@@ -196,7 +194,6 @@ public class L2LBitsWriterTest
         bw.Flush();
 
         if (ms.TryGetBuffer(out var buffer))
-        {
             Assert.Collection(buffer,
                 v => Assert.Equal((byte)'H', v),
                 v => Assert.Equal((byte)'e', v),
@@ -210,8 +207,7 @@ public class L2LBitsWriterTest
                 v => Assert.Equal((byte)'l', v),
                 v => Assert.Equal((byte)'d', v),
                 v => Assert.Equal((byte)'!', v)
-                );
-        }
+            );
         else
             throw new InvalidOperationException();
     }
@@ -240,7 +236,9 @@ public class L2LBitsWriterTest
             Assert.Equal(0b_00001011, buffer[6]);
         }
         else
+        {
             throw new InvalidOperationException();
+        }
     }
 
     [Fact]
@@ -250,10 +248,7 @@ public class L2LBitsWriterTest
         var bw = new L2LBitsWriter(ms);
 
         var nums = new ushort[16];
-        for (int i = 0; i < 16; i++)
-        {
-            nums[i] = (ushort)(0xff - (1 << i));
-        }
+        for (var i = 0; i < 16; i++) nums[i] = (ushort)(0xff - (1 << i));
 
         foreach (int num in nums)
             bw.Write(16, num);
@@ -262,14 +257,16 @@ public class L2LBitsWriterTest
         if (ms.TryGetBuffer(out var buffer))
         {
             Assert.Equal(32, buffer.Count);
-            for (int i = 0; i < 16; i++)
+            for (var i = 0; i < 16; i++)
             {
                 Assert.Equal(nums[i] & 0xff, buffer[i * 2]);
                 Assert.Equal((nums[i] >> 8) & 0xff, buffer[i * 2 + 1]);
             }
         }
         else
+        {
             throw new InvalidOperationException();
+        }
     }
 
     [Fact]
@@ -279,10 +276,7 @@ public class L2LBitsWriterTest
         var bw = new L2LBitsWriter(ms);
 
         var nums = new ushort[32];
-        for (int i = 0; i < 32; i++)
-        {
-            nums[i] = (ushort)(0xff - (1 << i));
-        }
+        for (var i = 0; i < 32; i++) nums[i] = (ushort)(0xff - (1 << i));
 
         foreach (int num in nums)
             bw.Write(32, num);
@@ -292,18 +286,17 @@ public class L2LBitsWriterTest
         {
             Assert.Equal(128, buffer.Count);
 
-            for (int i = 0; i < 32; i++)
+            for (var i = 0; i < 32; i++)
             {
                 Assert.Equal(nums[i] & 0xff, buffer[i * 4]);
                 Assert.Equal((nums[i] >> 8) & 0xff, buffer[i * 4 + 1]);
                 Assert.Equal((nums[i] >> 16) & 0xff, buffer[i * 4 + 2]);
                 Assert.Equal((nums[i] >> 24) & 0xff, buffer[i * 4 + 3]);
-
             }
         }
         else
+        {
             throw new InvalidOperationException();
+        }
     }
-
-
 }

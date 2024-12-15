@@ -178,5 +178,4 @@ public class H2LBitsReaderTest
         Assert.Equal(32, count);
         Assert.Equal(0b10000000001111111110000001010000, value);
     }
-
 }

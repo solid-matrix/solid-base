@@ -22,12 +22,12 @@ public unsafe class LzwCodec(int MAX_BIT_COUNT = 12)
 
         var pBuffer = stackalloc byte[1 << MAX_BIT_COUNT];
 
-        int pLen = 0;
+        var pLen = 0;
 
         bw.Write(size, CLEAR_CODE);
         while (true)
         {
-            int tmp = input.ReadByte();
+            var tmp = input.ReadByte();
             if (tmp == -1) break;
             pBuffer[pLen] = (byte)tmp;
 
@@ -41,13 +41,13 @@ public unsafe class LzwCodec(int MAX_BIT_COUNT = 12)
 
                 table.Add(pBuffer, pLen + 1, ++codeMax);
 
-                if (((codeMax + 1) >> size) > 0) size++;
+                if ((codeMax + 1) >> size > 0) size++;
 
-                if (codeMax + 3 >= (1 << MAX_BIT_COUNT))
+                if (codeMax + 3 >= 1 << MAX_BIT_COUNT)
                 {
                     bw.Write(size, CLEAR_CODE);
 
-                    table = new(MAX_BIT_COUNT);
+                    table = new TrieStringTable(MAX_BIT_COUNT);
                     codeMax = EOI_CODE;
                     size = MIN_BIT_COUNT;
                 }
@@ -68,13 +68,13 @@ public unsafe class LzwCodec(int MAX_BIT_COUNT = 12)
 
         byte[][] table = null!;
         uint codeMax = EOI_CODE;
-        int size = MIN_BIT_COUNT;
+        var size = MIN_BIT_COUNT;
 
         byte[]? p = null;
 
         while (true)
         {
-            int codeSize = br.Read(size, out uint code);
+            var codeSize = br.Read(size, out var code);
             if (codeSize != size) throw new Exception("fail to read code");
             if (code == EOI_CODE) break;
 
@@ -89,7 +89,7 @@ public unsafe class LzwCodec(int MAX_BIT_COUNT = 12)
             }
             else
             {
-                byte[] k = table[code];
+                var k = table[code];
 
                 if (k != null)
                 {
@@ -99,7 +99,7 @@ public unsafe class LzwCodec(int MAX_BIT_COUNT = 12)
                     {
                         ++codeMax;
                         table[codeMax] = [.. p, k[0]];
-                        if (((codeMax + 2) >> size) > 0) size++;
+                        if ((codeMax + 2) >> size > 0) size++;
                     }
 
                     p = k;
@@ -112,12 +112,11 @@ public unsafe class LzwCodec(int MAX_BIT_COUNT = 12)
 
                     ++codeMax;
                     table[codeMax] = k;
-                    if (((codeMax + 2) >> size) > 0) size++;
+                    if ((codeMax + 2) >> size > 0) size++;
 
                     p = k;
                 }
             }
         }
-
     }
 }
