@@ -46,27 +46,75 @@ public interface IEndianCodec
 
     nint ReadIntPtr(ReadOnlySpan<byte> source);
 
-    void WriteUInt16(ReadOnlySpan<byte> destination, ushort value);
+    void WriteUInt16(ushort value, Span<byte> destination);
 
-    void WriteInt16(ReadOnlySpan<byte> destination, short value);
+    void WriteInt16(short value, Span<byte> destination);
 
-    void WriteUInt32(ReadOnlySpan<byte> destination, uint value);
+    void WriteUInt32(uint value, Span<byte> destination);
 
-    void WriteInt32(ReadOnlySpan<byte> destination, int value);
+    void WriteInt32(int value, Span<byte> destination);
 
-    void WriteUInt64(ReadOnlySpan<byte> destination, ulong value);
+    void WriteUInt64(ulong value, Span<byte> destination);
 
-    void WriteInt64(ReadOnlySpan<byte> destination, long value);
+    void WriteInt64(long value, Span<byte> destination);
 
-    void WriteUInt128(ReadOnlySpan<byte> destination, UInt128 value);
+    void WriteUInt128(UInt128 value, Span<byte> destination);
 
-    void WriteInt128(ReadOnlySpan<byte> destination, Int128 value);
+    void WriteInt128(Int128 value, Span<byte> destination);
 
-    void WriteHalf(ReadOnlySpan<byte> destination, Half value);
+    void WriteHalf(Half value, Span<byte> destination);
 
-    void WriteSingle(ReadOnlySpan<byte> destination, float value);
+    void WriteSingle(float value, Span<byte> destination);
 
-    void WriteDouble(ReadOnlySpan<byte> destination, double value);
+    void WriteDouble(double value, Span<byte> destination);
 
-    void WriteIntPtr(ReadOnlySpan<byte> destination, nint value);
+    void WriteIntPtr(nint value, Span<byte> destination);
+
+    ReadOnlySpan<ushort> ReadUInt16Range(ReadOnlySpan<byte> source);
+
+    ReadOnlySpan<short> ReadInt16Range(ReadOnlySpan<byte> source);
+
+    ReadOnlySpan<uint> ReadUInt32Range(ReadOnlySpan<byte> source);
+
+    ReadOnlySpan<int> ReadInt32Range(ReadOnlySpan<byte> source);
+
+    ReadOnlySpan<ulong> ReadUInt64Range(ReadOnlySpan<byte> source);
+
+    ReadOnlySpan<long> ReadInt64Range(ReadOnlySpan<byte> source);
+
+    ReadOnlySpan<UInt128> ReadUInt128Range(ReadOnlySpan<byte> source);
+
+    ReadOnlySpan<Int128> ReadInt128Range(ReadOnlySpan<byte> source);
+
+    ReadOnlySpan<Half> ReadHalfRange(ReadOnlySpan<byte> source);
+
+    ReadOnlySpan<float> ReadSingleRange(ReadOnlySpan<byte> source);
+
+    ReadOnlySpan<double> ReadDoubleRange(ReadOnlySpan<byte> source);
+
+    ReadOnlySpan<nint> ReadIntPtrRange(ReadOnlySpan<byte> source);
+
+    void WriteUInt16Range(ReadOnlySpan<ushort> source, Span<byte> destination);
+
+    void WriteInt16Range(ReadOnlySpan<short> source, Span<byte> destination);
+
+    void WriteUInt32Range(ReadOnlySpan<uint> source, Span<byte> destination);
+
+    void WriteInt32Range(ReadOnlySpan<int> source, Span<byte> destination);
+
+    void WriteUInt64Range(ReadOnlySpan<ulong> source, Span<byte> destination);
+
+    void WriteInt64Range(ReadOnlySpan<long> source, Span<byte> destination);
+
+    void WriteUInt128Range(ReadOnlySpan<UInt128> source, Span<byte> destination);
+
+    void WriteInt128Range(ReadOnlySpan<Int128> source, Span<byte> destination);
+
+    void WriteHalfRange(ReadOnlySpan<Half> source, Span<byte> destination);
+
+    void WriteSingleRange(ReadOnlySpan<float> source, Span<byte> destination);
+
+    void WriteDoubleRange(ReadOnlySpan<double> source, Span<byte> destination);
+
+    void WriteIntPtrRange(ReadOnlySpan<nint> source, Span<byte> destination);
 }

@@ -85,4 +85,88 @@ public unsafe class EndianReaderBase(Stream stream, IEndianCodec codec) : IEndia
         stream.ReadExactly(buffer);
         return codec.ReadIntPtr(buffer);
     }
+
+    public ReadOnlySpan<ushort> ReadUInt16Range(int count)
+    {
+        var buffer = new byte[count * sizeof(ushort)];
+        stream.ReadExactly(buffer);
+        return codec.ReadUInt16Range(buffer);
+    }
+
+    public ReadOnlySpan<short> ReadInt16Range(int count)
+    {
+        var buffer = new byte[count * sizeof(short)];
+        stream.ReadExactly(buffer);
+        return codec.ReadInt16Range(buffer);
+    }
+
+    public ReadOnlySpan<uint> ReadUInt32Range(int count)
+    {
+        var buffer = new byte[count * sizeof(uint)];
+        stream.ReadExactly(buffer);
+        return codec.ReadUInt32Range(buffer);
+    }
+
+    public ReadOnlySpan<int> ReadInt32Range(int count)
+    {
+        var buffer = new byte[count * sizeof(int)];
+        stream.ReadExactly(buffer);
+        return codec.ReadInt32Range(buffer);
+    }
+
+    public ReadOnlySpan<ulong> ReadUInt64Range(int count)
+    {
+        var buffer = new byte[count * sizeof(ulong)];
+        stream.ReadExactly(buffer);
+        return codec.ReadUInt64Range(buffer);
+    }
+
+    public ReadOnlySpan<long> ReadInt64Range(int count)
+    {
+        var buffer = new byte[count * sizeof(long)];
+        stream.ReadExactly(buffer);
+        return codec.ReadInt64Range(buffer);
+    }
+
+    public ReadOnlySpan<UInt128> ReadUInt128Range(int count)
+    {
+        var buffer = new byte[count * sizeof(UInt128)];
+        stream.ReadExactly(buffer);
+        return codec.ReadUInt128Range(buffer);
+    }
+
+    public ReadOnlySpan<Int128> ReadInt128Range(int count)
+    {
+        var buffer = new byte[count * sizeof(Int128)];
+        stream.ReadExactly(buffer);
+        return codec.ReadInt128Range(buffer);
+    }
+
+    public ReadOnlySpan<Half> ReadHalfRange(int count)
+    {
+        var buffer = new byte[count * sizeof(Half)];
+        stream.ReadExactly(buffer);
+        return codec.ReadHalfRange(buffer);
+    }
+
+    public ReadOnlySpan<float> ReadSingleRange(int count)
+    {
+        var buffer = new byte[count * sizeof(float)];
+        stream.ReadExactly(buffer);
+        return codec.ReadSingleRange(buffer);
+    }
+
+    public ReadOnlySpan<double> ReadDoubleRange(int count)
+    {
+        var buffer = new byte[count * sizeof(double)];
+        stream.ReadExactly(buffer);
+        return codec.ReadDoubleRange(buffer);
+    }
+
+    public ReadOnlySpan<IntPtr> ReadIntPtrRange(int count)
+    {
+        var buffer = new byte[count * sizeof(IntPtr)];
+        stream.ReadExactly(buffer);
+        return codec.ReadIntPtrRange(buffer);
+    }
 }

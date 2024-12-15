@@ -45,4 +45,28 @@ public interface IEndianWriter
     void WriteDouble(double value);
 
     void WriteIntPtr(nint value);
+
+    void WriteUInt16Range(ReadOnlySpan<ushort> source);
+
+    void WriteInt16Range(ReadOnlySpan<short> source);
+
+    void WriteUInt32Range(ReadOnlySpan<uint> source);
+
+    void WriteInt32Range(ReadOnlySpan<int> source);
+
+    void WriteUInt64Range(ReadOnlySpan<ulong> source);
+
+    void WriteInt64Range(ReadOnlySpan<long> source);
+
+    void WriteUInt128Range(ReadOnlySpan<UInt128> source);
+
+    void WriteInt128Range(ReadOnlySpan<Int128> source);
+
+    void WriteHalfRange(ReadOnlySpan<Half> source);
+
+    void WriteSingleRange(ReadOnlySpan<float> source);
+
+    void WriteDoubleRange(ReadOnlySpan<double> source);
+
+    void WriteIntPtrRange(ReadOnlySpan<nint> source);
 }

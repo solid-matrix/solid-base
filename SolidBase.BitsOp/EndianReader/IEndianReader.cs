@@ -45,4 +45,28 @@ public interface IEndianReader
     double ReadDouble();
 
     nint ReadIntPtr();
+
+    ReadOnlySpan<ushort> ReadUInt16Range(int count);
+
+    ReadOnlySpan<short> ReadInt16Range(int count);
+
+    ReadOnlySpan<uint> ReadUInt32Range(int count);
+
+    ReadOnlySpan<int> ReadInt32Range(int count);
+
+    ReadOnlySpan<ulong> ReadUInt64Range(int count);
+
+    ReadOnlySpan<long> ReadInt64Range(int count);
+
+    ReadOnlySpan<UInt128> ReadUInt128Range(int count);
+
+    ReadOnlySpan<Int128> ReadInt128Range(int count);
+
+    ReadOnlySpan<Half> ReadHalfRange(int count);
+
+    ReadOnlySpan<float> ReadSingleRange(int count);
+
+    ReadOnlySpan<double> ReadDoubleRange(int count);
+
+    ReadOnlySpan<nint> ReadIntPtrRange(int count);
 }
